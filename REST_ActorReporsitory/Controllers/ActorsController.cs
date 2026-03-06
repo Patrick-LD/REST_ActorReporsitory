@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using REST_ActorReporsitory.Models;
 using REST_ActorReporsitory.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace REST_ActorReporsitory.Controllers
 {
@@ -49,6 +50,7 @@ namespace REST_ActorReporsitory.Controllers
             return Ok(actor);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,6 +78,7 @@ namespace REST_ActorReporsitory.Controllers
             return Ok(updated);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult<Actor> Delete(int id)
         {

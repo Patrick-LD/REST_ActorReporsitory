@@ -3,11 +3,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace REST_ActorReporsitory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _config;
@@ -17,11 +19,10 @@ namespace REST_ActorReporsitory.Controllers
             _config = config;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest login)
         {
-            // 1. Validate the user (In a real scenario, check your database here)
-            // Here we use a simple hardcoded check:
             if (login.Username == "admin" && login.Password == "1234")
             {
                 var token = GenerateJwtToken(login.Username);
