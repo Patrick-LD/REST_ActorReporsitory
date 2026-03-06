@@ -38,20 +38,20 @@ namespace REST_ActorReporsitory.Controllers
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Claims are the pieces of information "baked" into the token
+            // Claims er informationer der bliver pakket ind i tokenet
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, "Admin") // You can add roles here
+                new Claim(ClaimTypes.Role, "Admin") // Man kan tilføje roller her
             };
 
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(2), // Token is valid for 2 hours
+                expires: DateTime.Now.AddHours(2), // Token er gyldigt i 2 timer
                 signingCredentials: creds
             );
 
@@ -59,7 +59,7 @@ namespace REST_ActorReporsitory.Controllers
         }
     }
 
-    // Helper class to receive JSON data
+    // Hjælpeklasse til at modtage JSON data
     public class LoginRequest
     {
         public string Username { get; set; } = string.Empty;

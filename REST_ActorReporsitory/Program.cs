@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
 
-// Add services to the container.
+// Tilføj services til containeren.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
