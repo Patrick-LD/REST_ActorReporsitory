@@ -88,6 +88,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors("AllowAll");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapGet("/", () => Results.Redirect("/api/actors"));
 app.MapControllers();
